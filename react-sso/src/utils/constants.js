@@ -1,2 +1,2 @@
-export const RENDER_API_ROOT = ''
-export const LOCAL_API_ROOT = 'http://localhost:8017'
+export const RENDER_API_ENDPOINT = 'https://node-server-sso-g7b5.onrender.com';
+export const LOCAL_API_ENDPOINT = 'http://localhost:8017';

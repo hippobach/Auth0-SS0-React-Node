@@ -6,13 +6,19 @@ import LoginButton from './components/LoginButton';
 import LogoutButton from './components/LogoutButton';
 
 function App() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
   return (
     <div className="app-container">
       <div className="fixed-box">
         <h1>Auth0 SSO | Bach Nguyen</h1>
         <div className="actions">
-          {!isAuthenticated ? <LoginButton /> : <LogoutButton />}
+          {isLoading ? (
+            <div className="loading">Loading...</div>
+          ) : !isAuthenticated ? (
+            <LoginButton />
+          ) : (
+            <LogoutButton />
+          )}
         </div>
         {/* Phần dashboard sau khi đăng nhập */}
         <Dashboard />
