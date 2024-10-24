@@ -1,28 +1,23 @@
-import axios from 'axios';
 import ReactJson from 'react-json-view';
 import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { RENDER_API_ENDPOINT } from '../utils/constants';
+import customAxiosInstance from '../utils/customAxios';
 
 const Dashboard = () => {
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
-    useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   const [privateUsers, setPrivateUsers] = useState(null);
 
   useEffect(() => {
     const fetchPrivateUsers = async () => {
-      const accessToken = await getAccessTokenSilently();
-      const res = await axios.get(
-        `${RENDER_API_ENDPOINT}/api-v1/users/private/get_all`,
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
+      const res = await customAxiosInstance.get(
+        `${RENDER_API_ENDPOINT}/api-v1/users/private/get_all`
       );
       setPrivateUsers(res.data);
     };
-    fetchPrivateUsers();
-  }, [getAccessTokenSilently]);
+    if (isAuthenticated) fetchPrivateUsers();
+  }, [isAuthenticated]);
 
   if (!isAuthenticated) return null;
 

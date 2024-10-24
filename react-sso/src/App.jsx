@@ -4,9 +4,12 @@ import './App.css';
 import Dashboard from './pages/Dashboard';
 import LoginButton from './components/LoginButton';
 import LogoutButton from './components/LogoutButton';
+import { injectFn } from './utils/customAxios';
 
 function App() {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  injectFn(getAccessTokenSilently);
+
   return (
     <div className="app-container">
       <div className="fixed-box">
