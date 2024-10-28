@@ -12,6 +12,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       audience: RENDER_API_ENDPOINT, // cần audience để nhận được valid jwt token từ Auth0
     }}
     cacheLocation="localstorage" // default: memory
+    useRefreshTokens={true}
+    useRefreshTokensFallback={true}
   >
     <App />
   </Auth0Provider>
