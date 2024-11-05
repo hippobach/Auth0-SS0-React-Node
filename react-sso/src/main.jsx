@@ -11,9 +11,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       redirect_uri: window.location.origin,
       audience: RENDER_API_ENDPOINT, // cần audience để nhận được valid jwt token từ Auth0
     }}
-    cacheLocation="localstorage" // default: memory
+    // Refresh Tokens
     useRefreshTokens={true}
     useRefreshTokensFallback={true}
+    // SSO
+    cookieDomain=".nxb.local"
+    cacheLocation="memory" // default: memory, để sử dụng SSO (đăng nhập, đăng xuất) thì chuyển về memory
   >
     <App />
   </Auth0Provider>
